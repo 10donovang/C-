@@ -1,0 +1,57 @@
+/***********************************************************************
+ * Header File:
+ *    VELOCITY: sets the speed of the lander
+ * Author:
+ *    Donovan Gregory
+ * Summary:
+ *    Speed is quite relative
+ ************************************************************************/
+
+#ifndef VELOCITY_H
+#define VELOCITY_H
+
+
+
+/********************************************
+ * VELOCITY
+ * Speed, its how fast one is going
+ ********************************************/
+class Velocity
+{
+public:
+   // non-default speed
+  Velocity (float x, float y)
+  {
+    setDX(x);
+    setDY(y);
+  }
+
+   // default speed
+   Velocity()
+   {
+      dx = 0;
+      dy = 0;
+   }
+   
+   // set's how much the Landers x posistion is affected   
+   void setDX(float x);
+
+   // set's how much the landers y posistion is affected
+   void setDY(float y);
+
+   // retrieve's the new spped for x
+   float getDX(){return dx;}
+
+   // retrieve's the new speed for y
+   float getDY(){return dy;}
+
+ 
+   
+private:
+
+   float dx;
+   float dy;
+};
+
+
+#endif

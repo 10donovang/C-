@@ -1,0 +1,57 @@
+/***********************************************************************
+ * Source File:
+ *   Bullet Object: shoots things
+ * Author:
+ *    Donovan Gregory
+ * Summary:
+ *    It's slower than superman.
+ ************************************************************************/
+
+#include "bullet.h"
+
+
+/*******************************************
+ * Bullet
+ * Sets the default 
+ *******************************************/
+Bullet :: Bullet()
+{
+  Point startPoint(200, -150);
+  setPoint(startPoint);
+  setVelocity(Velocity(0, 0));
+  setAlive(true);
+}
+
+/**********************************************
+ * Bullet: Kill
+ * Death to this bullet
+ **********************************************/
+void Bullet :: kill()
+{
+  setAlive(false);
+}
+
+/************************************************
+ * Bullet: Draw
+ * Draws the bullet on the screen
+ ************************************************/
+void Bullet :: draw()
+{
+  drawDot(getPoint());
+}
+
+/*************************************************
+ * Bullet: Fire
+ * Fires the bullet at the birdie
+ *************************************************/
+void Bullet :: fire(Point startPoint, float angle)
+{
+  setPoint(startPoint);
+  draw();
+  float dx = BULLET_SPEED * (-cos(M_PI / 180.0 * angle));
+  float dy = BULLET_SPEED * (sin(M_PI / 180.0 * angle));
+  Velocity newSpeed(dx, dy);
+  setVelocity(newSpeed);
+}
+  
+

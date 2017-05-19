@@ -1,0 +1,71 @@
+#include "ship.h"
+#include <iostream>
+using namespace std;
+
+// Put your ship methods here
+/****************************************
+ * This is how a ship is made
+ ****************************************/
+Ship :: Ship()
+{
+  setAngle(90);
+  Point startPoint(0.0, 0.0);
+  setPoint(startPoint);
+  
+  setAlive(true);
+}
+
+/*****************************************
+ * This is how a ship looks like a ship 
+ *****************************************/
+
+void Ship :: draw() 
+{
+  drawShip(getPoint(), getAngle());
+}
+
+/*******************************************
+ * This makes the ship look left
+ *******************************************/
+void Ship :: moveLeft()
+{
+  float tempAngle = getAngle();
+  tempAngle += ROTATE_AMOUNT;
+  setAngle(tempAngle);
+}
+
+/*******************************************
+ * This makes the ship look right
+ *******************************************/
+void Ship :: moveRight()
+{
+  float temp = getAngle();
+  temp -= ROTATE_AMOUNT;
+  setAngle(temp);
+}
+
+/*******************************************
+ * This makes the ship go forward
+ *******************************************/
+void Ship :: moveForward()
+{
+  int angle = getAngle();
+  
+  cout << "Angle :" << angle << endl;
+  float dx = THRUST_AMOUNT * (sin(M_PI / 180.0 * angle));
+  float dy = THRUST_AMOUNT * (cos(M_PI / 180.0 * angle));
+
+  cout << "DX = " << dx << endl;
+  cout << "DY = " << dy << endl;
+  Velocity newSpeed(dx + 1.75, dy);
+  setVelocity(newSpeed);
+}
+
+/**********************************************
+ * We're hit!
+ **********************************************/
+int Ship:: hit()
+{
+  setAlive(false);
+  return 0;
+}

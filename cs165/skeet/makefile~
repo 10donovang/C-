@@ -1,0 +1,73 @@
+###############################################################
+# Program:
+#     Milestone 08, Skeet
+#     Brother Ercanbrack, CS165
+# Author:
+#     Donovan Gregory
+# Summary:
+#      
+# Above and Beyond
+#     When you submit your final project (not for milestones),
+#     list anything here that you did to go above and beyond
+#     the base requirements for your project.
+###############################################################
+
+
+LFLAGS = -lglut -lGLU -lGL
+
+###############################################################
+# Build the main game
+###############################################################
+a.out: driver.o game.o uiInteract.o uiDraw.o point.o rifle.o bullet.o flyingobject.o bird.o standardbird.o velocity.o
+	g++ driver.o game.o uiInteract.o uiDraw.o point.o rifle.o bullet.o flyingobject.o bird.o standardbird.o velocity.o $(LFLAGS)
+
+###############################################################
+# Individual files
+#    uiDraw.o      Draw polygons on the screen and do all OpenGL graphics
+#    uiInteract.o  Handles input events
+#    point.o       The position on the screen
+#    ground.o      Handles the ground / world
+#    game.o        Handles the game interaction
+#    bullet.o      The bulets fly across the scream
+#    bird.o        The way the bird flies
+#    flyingobject.o The way flyingobject flies
+#    standardbird.o Normal birdie.
+#    velocity.o n   The speed of objects
+###############################################################
+uiDraw.o: uiDraw.cpp uiDraw.h point.h
+	g++ -g uiDraw.cpp
+
+uiInteract.o: uiInteract.cpp uiInteract.h
+	g++ -g uiInteract.cpp
+
+point.o: point.cpp point.h
+	g++ -g point.cpp
+
+game.o: game.cpp uiDraw.h uiInteract.h point.h rifle.h bullet.h bird.h velocity.h flyingobject.h 
+	g++ -g game.cpp
+
+driver.o: game.h uiInteract.h driver.cpp
+	g++ -g driver.cpp
+
+rifle.o: rifle.h point.h uiDraw.h rifle.cpp
+	g++ -g rifle.cpp
+
+#######################################################################
+# ADD YOUR ADDITIONAL RULES HERE!
+#
+# Then, don't forget to add them to the dependecy list for a.out above.
+#######################################################################
+bullet.o: bullet.h point.h velocity.h flyingobject.h uiDraw.h bullet.cpp
+	g++ -g bullet.cpp
+bird.o: bird.h point.h velocity.h flyingobject.h bird.cpp
+	g++ -g bird.cpp
+standardbird.o: standardbird.h point.h velocity.h flyingobject.h bird.h uiDraw.h standardbird.cpp
+	g++ -g standardbird.cpp
+velocity.o: velocity.h point.h velocity.cpp
+	g++ -g velocity.cpp
+
+###############################################################
+# General rules
+###############################################################
+clean:
+	rm a.out *.o

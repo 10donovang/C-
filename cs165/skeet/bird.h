@@ -1,0 +1,40 @@
+/***********************************************************************
+ * Header File:
+ *    Bird : The representation of a bird. Tweet tweet.
+ * Author:
+ *    Donovan Gregory
+ * Summary:
+ *    Creates a bird on the screen and sends it in some direction. Killing
+ *    it when it reaches the end of the screen
+ ************************************************************************/
+
+
+#ifndef BIRD_H
+#define BIRD_H
+
+#include <iostream>
+#include "point.h"
+#include "velocity.h"
+#include "flyingobject.h"
+
+using namespace std;
+
+/*********************************************
+ * BIRD
+ * Overview of birdies
+ *********************************************/
+class Bird : public FlyingObject
+{
+public:
+
+  void kill(){setAlive(false);}
+  void setPoints(int newPoints){this->points = newPoints;}
+  virtual int hit() = 0;
+  virtual void draw() = 0;
+
+ private:
+  int points;
+};
+
+
+#endif
